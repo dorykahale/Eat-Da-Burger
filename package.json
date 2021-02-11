@@ -4,9 +4,15 @@
   "description": "A restaurant application that lets users input the names of burgers they'd like to eat. Whenever a user submits a burger's name, your app will display the burger on the left side of the page -- waiting to be devoured.  * Each burger in the waiting area also has a `Devour it!` button. When the user clicks it, the burger will move to the right side of the page.",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
-    "mysql": "^2.18.1"
+    "method-override": "^3.0.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "node": "^15.8.0",
+    "sequelize-heroku": "^2.1.6"
   },
   "devDependencies": {},
   "scripts": {

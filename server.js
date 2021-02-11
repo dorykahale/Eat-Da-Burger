@@ -1,15 +1,38 @@
-var express = require('express');
+// Create express connection and run node server
+var express = require("express");
+var exphbs = require("express-handlebars");
+var methodOverride = require("method-override");
+
+var PORT = process.env.PORT || 8080;
 
 var app = express();
 
-var port = 8080;
+// Serve static content for the app from the "public" directory in the application directory.
+// This is a level of abstraction to hide credentials from user
+app.use(express.static('public'));
 
+// Parse application body as JSON
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(express.json());
 
-app.get("/home", function(req, res) {
-    res.render("hello world");
-})
+// the main page is always displayed
+app.use(methodOverride('_method'));
+app.engine("handlebars", exphbs({
+  defaultLayout: "main"
+}));
+app.set("view engine", "handlebars");
 
-app.listen(port, function() {
-    console.log("Server running on port ", port);
+// Import routes and give the server access to them.
+// Norm is to call it "var = routes"
+var routes = require("./controllers/burgersController.js");
+
+// Use express routes defined
+app.use("/", routes);
+
+// Start our server so that it can begin listening to client requests.
+app.listen(PORT, function () {
+  // Log (server-side) when our server has started
+  console.log("Server listening on: http://localhost:" + PORT);
 });
