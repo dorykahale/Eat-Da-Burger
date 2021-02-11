@@ -13,12 +13,12 @@ app.use(express.static('public'));
 
 // Parse application body as JSON
 app.use(express.urlencoded({
-  extended: false
+  extended: true
 }));
 app.use(express.json());
 
 // the main page is always displayed
-app.use(methodOverride('_method'));
+// app.use(methodOverride('_method'));
 app.engine("handlebars", exphbs({
   defaultLayout: "main"
 }));
@@ -29,7 +29,7 @@ app.set("view engine", "handlebars");
 var routes = require("./controllers/burgersController.js");
 
 // Use express routes defined
-app.use("/", routes);
+app.use(routes);
 
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, function () {
